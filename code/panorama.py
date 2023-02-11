@@ -6,7 +6,6 @@ def initializeCanvas(H, W):
     ratio = H / np.pi
     return canvas, ratio
 
-
 def generateMesh(shape, FOV_H=np.pi/4, FOV_W=np.pi/3):
     H, W, _ = shape
     center_H = H / 2.0
@@ -30,7 +29,6 @@ def generateMesh(shape, FOV_H=np.pi/4, FOV_W=np.pi/3):
 
     return x_ca, y_ca, z_ca
 
-
 def sphericalToCartesian(theta, phi):
     rho = 1
     x = rho * np.sin(phi) * np.cos(theta)
@@ -38,13 +36,11 @@ def sphericalToCartesian(theta, phi):
     z = rho * np.cos(phi)
     return x, y, z
 
-
 def cartesianToSpherical(x, y, z):
     rho = np.sqrt(x ** 2 + y ** 2 + z ** 2)
     phi = np.arccos(z / rho)
     theta = np.arctan2(y, x)
     return phi, theta
-
 
 def transformPixels(x, y, z, Rot):
     H, W = x.shape
@@ -65,7 +61,6 @@ def transformPixels(x, y, z, Rot):
     z_prime = coords_reshaped[2, :]
 
     return x_prime, y_prime, z_prime
-
 
 def copyPixels(img, canvas, x, y):
     H, W, _ = img.shape

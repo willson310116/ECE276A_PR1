@@ -10,23 +10,22 @@ import numpy as np
 import transforms3d
 import matplotlib.pyplot as plt
 from jax import grad, jit, vmap
-# from __future__ import division
 
 
-def CostFunction2(q1_T):
-    cost = 0.0
-    for t in range(T - 1):
-        wT = jnp.asarray([newImud[4][t], newImud[5][t], newImud[3][t]])
-        aT = jnp.asarray([0, newImud[0][t], newImud[1][t], newImud[2][t]])
-        deltaT = imud["ts"][0][t] - imud["ts"][0][t - 1]
-        q_exp = jnp.asarray([0, (wT[0] * deltaT) / 2, (wT[1] * deltaT) / 2, (wT[2] * deltaT) / 2])
-        g = jnp.asarray([0, 0, 0, -9.8])
+# def CostFunction2(q1_T):
+#     cost = 0.0
+#     for t in range(T - 1):
+#         wT = jnp.asarray([newImud[4][t], newImud[5][t], newImud[3][t]])
+#         aT = jnp.asarray([0, newImud[0][t], newImud[1][t], newImud[2][t]])
+#         deltaT = imud["ts"][0][t] - imud["ts"][0][t - 1]
+#         q_exp = jnp.asarray([0, (wT[0] * deltaT) / 2, (wT[1] * deltaT) / 2, (wT[2] * deltaT) / 2])
+#         g = jnp.asarray([0, 0, 0, -9.8])
 
-        cost += QuaternionMagnitude(2 * QuaternionLog(QuaternionMultiply(QuaternionInverse(q1_T[t + 1]), \
-        QuaternionMultiply(q1_T[t], QuaternionExp(q_exp))))) + \
-        QuaternionMagnitude(aT - jnp.asarray(QuaternionMultiply(QuaternionMultiply(QuaternionInverse(q1_T[t + 1]), g), q1_T[t + 1])))
+#         cost += QuaternionMagnitude(2 * QuaternionLog(QuaternionMultiply(QuaternionInverse(q1_T[t + 1]), \
+#         QuaternionMultiply(q1_T[t], QuaternionExp(q_exp))))) + \
+#         QuaternionMagnitude(aT - jnp.asarray(QuaternionMultiply(QuaternionMultiply(QuaternionInverse(q1_T[t + 1]), g), q1_T[t + 1])))
 
-    return 0.5 * cost
+#     return 0.5 * cost
 
 
 
